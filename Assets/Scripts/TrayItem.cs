@@ -16,12 +16,15 @@ public class TrayItem : MonoBehaviour
 
     public void OnSetFood(List<Sprite> items)
     {
-        if (items.Count < _foodList.Count)
+        if (items.Count <= _foodList.Count)
         {
-            Image slot = this.RandomSlot();
-            slot.gameObject.SetActive(false);
-            slot.sprite = items[1];
-            slot.SetNativeSize();
+            for (int i = 0; i < items.Count; i++)
+            {
+                Image slot = this.RandomSlot();
+                slot.gameObject.SetActive(true);
+                slot.sprite = items[i];
+                slot.SetNativeSize();
+            }          
         }
     }
 
