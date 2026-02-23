@@ -23,10 +23,44 @@ public class GrillStation : MonoBehaviour
         List<Sprite> list = listFood;
         List<Sprite> listSlot = Utils.TakeAndRemoveRandom<Sprite>(list, foodCount);
 
-        for(int i = 0; i < list.Count; i++)
+        for(int i = 0; i < listSlot.Count; i++)
         {
             FoodSlot slot = this.RandomSlot();
-            slot.OnSetSlot(list[i]);
+            slot.OnSetSlot(listSlot[i]);
+        }
+
+
+        // xu ly dia
+        List<List<Sprite>> remainFood = new List<List<Sprite>>();
+
+        for(int i = 0; i < totalTray - 1; i++)
+        {
+            remainFood.Add(new List<Sprite>());
+            int n = Random.Range(0, listFood.Count);
+            remainFood[i].Add(listFood[n]);
+            listFood.RemoveAt(n);
+        }
+
+        while(listFood.Count > 0)
+        {
+            int rand = Random.Range(0, remainFood.Count);
+            if (remainFood[rand].Count < 4)
+            {
+                int n = Random.Range(0, listFood.Count);
+                remainFood[rand].Add(listFood[n]);
+                listFood.RemoveAt(n);
+            }
+        }
+
+        for(int i = 0; i < _totalTrays.Count; i++)
+        {
+            bool active = i < remainFood.Count;
+            _totalTrays[i].gameObject.SetActive(active);
+
+            if (active)
+            {
+                _totalTrays[i].OnSetFood(remainFood[i]);
+            }
         }
     }
 

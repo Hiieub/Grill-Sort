@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             (useFood[i], useFood[rand]) = (useFood[rand],  useFood[i]); // doi vi tri
         }
 
-        _avgTray = Random.Range(1.5f, 2.5f);
+        _avgTray = Random.Range(1.5f, 2f);
         int totalTray = Mathf.RoundToInt(useFood.Count / _avgTray); // tinh tong so dia
 
         List<int> trayPerGrill = this.DistributeEvelyn(_totalGrill, totalTray);
