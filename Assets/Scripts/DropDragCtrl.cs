@@ -50,8 +50,15 @@ public class DropDragCtrl : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && _hasDrag)
         {
             _imgFoodDrag.gameObject.SetActive(false);
-            _currentFood.OnActiveFood(true);
-            _currentFood = null;
+            //_currentFood.OnActiveFood(true);
+            //_currentFood = null;
+            if (_currentFood != null)
+            {
+                _currentFood.OnActiveFood(true);
+                _currentFood = null;
+            }
+
+            _hasDrag = false;
         }
     }
 }
