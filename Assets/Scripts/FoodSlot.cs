@@ -18,5 +18,11 @@ public class FoodSlot : MonoBehaviour
         _imgFood.SetNativeSize();
     }
 
+    public void OnActiveFood(bool active)
+    {
+        _imgFood.gameObject.SetActive(active);
+    }
+
     public bool HasFood => _imgFood.gameObject.activeInHierarchy;
+    public Sprite GetSpriteFood => _imgFood.sprite;
 }
