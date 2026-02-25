@@ -5,7 +5,7 @@ public class DropDragCtrl : MonoBehaviour
 {
     [SerializeField] private Image _imgFoodDrag;
 
-    private FoodSlot _currentFood;
+    private FoodSlot _currentFood, _cacheFood;
     private bool _hasDrag;
     private Vector3 _offset;
 
@@ -24,6 +24,7 @@ public class DropDragCtrl : MonoBehaviour
             if(_currentFood != null && _currentFood.HasFood)
             {
                 _hasDrag = true;
+                _cacheFood = _currentFood;
                 // gan sprite cho dummy image
                 _imgFoodDrag.gameObject.SetActive(true);
                 _imgFoodDrag.sprite = _currentFood.GetSpriteFood;
@@ -45,6 +46,26 @@ public class DropDragCtrl : MonoBehaviour
             Vector3 foodPos = mouseWordPos + _offset;
             foodPos.z = 0f;
             _imgFoodDrag.transform.position = foodPos;
+
+            FoodSlot slot = Utils.GetRayCastUI<FoodSlot>(Input.mousePosition);
+            if(slot != null)
+            {
+                if (!slot.HasFood) // vi tri item chua co food
+                {
+                    if (_cacheFood.GetInstanceID() != slot.GetInstanceID())
+                    {
+                        _cacheFood.OnHideFood();
+                        _cacheFood = slot;
+                        _cacheFood.OnFadeFood();
+                        _cacheFood.OnSetSlot(_currentFood.GetSpriteFood);
+                    }
+                }
+                else // vi tri tro chuot da co item
+                {
+
+                }
+                
+            }
         }
 
         if (Input.GetMouseButtonUp(0) && _hasDrag)
