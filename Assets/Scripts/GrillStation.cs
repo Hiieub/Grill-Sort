@@ -71,4 +71,15 @@ public class GrillStation : MonoBehaviour
 
         return _totalSlot[n];
     }
+
+    public FoodSlot GetSlotNull()
+    {
+        for(int i = 0; i < _totalSlot.Count; i++)
+        {
+            if (!_totalSlot[i].HasFood)
+                return _totalSlot[i];
+        }
+
+        return null;
+    }
 }

@@ -8,11 +8,13 @@ public class FoodSlot : MonoBehaviour
     private Color _normalColor = new Color(1f, 1f, 1f, 1f);
     private Color _fadeColor = new Color(1f, 1f, 1f, 0.7f);
 
+    private GrillStation _grillCtrl;
 
     void Awake()
     {
         _imgFood = this.transform.GetChild(0).GetComponent<Image>();
         _imgFood.gameObject.SetActive(false);
+        _grillCtrl = this.transform.parent.GetComponent<GrillStation>();
     }
 
     public void OnSetSlot(Sprite spr)
@@ -39,6 +41,8 @@ public class FoodSlot : MonoBehaviour
         _imgFood.color = _normalColor;
     }
 
-    public bool HasFood => _imgFood.gameObject.activeInHierarchy;
+    public FoodSlot GetSlotNull => _grillCtrl != null ? _grillCtrl.GetSlotNull() : null;
+
+    public bool HasFood => _imgFood.gameObject.activeInHierarchy && _imgFood.color == _normalColor;
     public Sprite GetSpriteFood => _imgFood.sprite;
 }

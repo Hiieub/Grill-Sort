@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DropDragCtrl : MonoBehaviour
@@ -52,9 +52,9 @@ public class DropDragCtrl : MonoBehaviour
             {
                 if (!slot.HasFood) // vi tri item chua co food
                 {
-                    if (_cacheFood.GetInstanceID() != slot.GetInstanceID())
+                    if (_cacheFood == null || _cacheFood.GetInstanceID() != slot.GetInstanceID())
                     {
-                        _cacheFood.OnHideFood();
+                        _cacheFood?.OnHideFood();
                         _cacheFood = slot;
                         _cacheFood.OnFadeFood();
                         _cacheFood.OnSetSlot(_currentFood.GetSpriteFood);
@@ -62,10 +62,28 @@ public class DropDragCtrl : MonoBehaviour
                 }
                 else // vi tri tro chuot da co item
                 {
-
+                    FoodSlot slotAvlable = slot.GetSlotNull;
+                    if(slotAvlable != null)
+                    {
+                        _cacheFood?.OnHideFood();
+                        _cacheFood = slotAvlable;
+                        _cacheFood.OnFadeFood();
+                        _cacheFood.OnSetSlot(_currentFood.GetSpriteFood);
+                    }
+                    else
+                    {
+                        this.OnClearCacheSlot();
+                    }
                 }
-                
             }
+            //else
+            //{
+            //    if(_cacheFood != null)
+            //    {
+            //        _cacheFood.OnHideFood();
+            //        _cacheFood = null;
+            //    }
+            //}
         }
 
         if (Input.GetMouseButtonUp(0) && _hasDrag)
@@ -80,6 +98,18 @@ public class DropDragCtrl : MonoBehaviour
             }
 
             _hasDrag = false;
+
+            this.OnClearCacheSlot();
         }
+    }
+
+    private void OnClearCacheSlot()
+    {
+        if(_cacheFood != null && (_currentFood == null || _cacheFood.GetInstanceID() != _currentFood.GetInstanceID()))
+        {
+            _cacheFood.OnHideFood();
+            _cacheFood = null;
+        }
+        
     }
 }
