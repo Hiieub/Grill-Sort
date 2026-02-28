@@ -6,7 +6,7 @@ public class FoodSlot : MonoBehaviour
     private Image _imgFood;
 
     private Color _normalColor = new Color(1f, 1f, 1f, 1f);
-    private Color _fadeColor = new Color(1f, 1f, 1f, 0.7f);
+    private Color _fadeColor = new Color(1f, 1f, 1f, 0.6f);
 
     private GrillStation _grillCtrl;
 
@@ -14,7 +14,7 @@ public class FoodSlot : MonoBehaviour
     {
         _imgFood = this.transform.GetChild(0).GetComponent<Image>();
         _imgFood.gameObject.SetActive(false);
-        _grillCtrl = this.transform.parent.GetComponent<GrillStation>();
+        _grillCtrl = this.transform.parent.parent.GetComponent<GrillStation>();
     }
 
     public void OnSetSlot(Sprite spr)
@@ -27,6 +27,7 @@ public class FoodSlot : MonoBehaviour
     public void OnActiveFood(bool active)
     {
         _imgFood.gameObject.SetActive(active);
+        _imgFood.color = _normalColor;
     }
 
     public void OnFadeFood()
@@ -39,6 +40,11 @@ public class FoodSlot : MonoBehaviour
     {
         this.OnActiveFood(false);
         _imgFood.color = _normalColor;
+    }
+
+    public void OnCheckMerge()
+    {
+        _grillCtrl?.OnCheckMerge();
     }
 
     public FoodSlot GetSlotNull => _grillCtrl != null ? _grillCtrl.GetSlotNull() : null;

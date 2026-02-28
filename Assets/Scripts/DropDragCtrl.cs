@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class DropDragCtrl : MonoBehaviour
 {
@@ -88,24 +89,33 @@ public class DropDragCtrl : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && _hasDrag)
         {
-            _imgFoodDrag.gameObject.SetActive(false);
-            //_currentFood.OnActiveFood(true);
-            //_currentFood = null;
-            if (_currentFood != null)
+            if(_cacheFood != null) // xu ly fill item
             {
-                _currentFood.OnActiveFood(true);
-                _currentFood = null;
+                _imgFoodDrag.transform.DOMove(_cacheFood.transform.position, 0.15f).OnComplete(() =>
+                {
+                    _imgFoodDrag.gameObject.SetActive(false);
+                    _cacheFood.OnSetSlot(_currentFood.GetSpriteFood);
+                    _cacheFood.OnActiveFood(true);
+                    _cacheFood.OnCheckMerge();
+                    _cacheFood = null;
+                });
+            }
+            else // xu ly tro ve vi tri ban dau
+            {
+                _imgFoodDrag.transform.DOMove(_currentFood.transform.position, 0.3f).OnComplete(() =>
+                {
+                    _imgFoodDrag.gameObject.SetActive(false);
+                    _currentFood.OnActiveFood(true);
+                });
             }
 
             _hasDrag = false;
-
-            this.OnClearCacheSlot();
         }
     }
 
     private void OnClearCacheSlot()
     {
-        if(_cacheFood != null && (_currentFood == null || _cacheFood.GetInstanceID() != _currentFood.GetInstanceID()))
+        if(_cacheFood != null && _cacheFood.GetInstanceID() != _currentFood.GetInstanceID())
         {
             _cacheFood.OnHideFood();
             _cacheFood = null;
