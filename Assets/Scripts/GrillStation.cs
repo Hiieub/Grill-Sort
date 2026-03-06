@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GrillStation : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GrillStation : MonoBehaviour
 
     private List<TrayItem> _totalTrays;
     private List<FoodSlot> _totalSlot;
+
+    private Stack<TrayItem> _stackTrays = new Stack<TrayItem>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -60,6 +63,8 @@ public class GrillStation : MonoBehaviour
             if (active)
             {
                 _totalTrays[i].OnSetFood(remainFood[i]);
+                TrayItem item = _totalTrays[i];
+                _stackTrays.Push(item);
             }
         }
     }
@@ -83,6 +88,17 @@ public class GrillStation : MonoBehaviour
         return null;
     }
 
+    private bool HasGrillEmpty()
+    {
+        for (int i = 0; i < _totalSlot.Count; i++)
+        {
+            if (_totalSlot[i].HasFood)
+                return false;
+        }
+
+        return true;
+    }
+
     public void OnCheckMerge()
     {
         if(this.GetSlotNull() == null) // kiem tra xem so luong slot du 3 item chua, neu chua du thi == null
@@ -95,7 +111,37 @@ public class GrillStation : MonoBehaviour
                 {
                     _totalSlot[i].OnActiveFood(false);
                 }
+
+                this.OnPrepareTray();
             }
+        }
+    }
+
+    public void OnCheckPrepareTray()
+    {
+        if (this.HasGrillEmpty())
+        {
+            this.OnPrepareTray();
+        }
+    }
+
+    private void OnPrepareTray()
+    {
+        if (_stackTrays.Count > 0)
+        {
+            TrayItem item = _stackTrays.Pop();
+
+            for (int i = 0; i < item.FoodList.Count; i++)
+            {
+                Image img = item.FoodList[i];
+                if (img.gameObject.activeInHierarchy)
+                {
+                    _totalSlot[i].OnPrepareItem(img);
+                    img.gameObject.SetActive(false);
+                }
+            }
+
+            item.gameObject.SetActive(false);
         }
     }
 
