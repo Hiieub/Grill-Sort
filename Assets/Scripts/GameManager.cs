@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager _instance;
+    public static GameManager Instance => _instance;
+
     [SerializeField] private int _totalFood; // tong so loai thuc an
     [SerializeField] private int _totalGrill; // tong so bep
     [SerializeField] private Transform _gridGrill;
@@ -18,6 +21,7 @@ public class GameManager : MonoBehaviour
         _listGrills = Utils.GetListInChild<GrillStation>(_gridGrill);
         Sprite[] loadedSprite = Resources.LoadAll<Sprite>("Items");
         _totalSPriteFood = loadedSprite.ToList();
+        _instance = this;
     }
 
     void Start()
@@ -88,5 +92,14 @@ public class GameManager : MonoBehaviour
         }
 
         return result;
+    }
+
+    public void OnMinusFood()
+    {
+        --_totalFood;
+        if(_totalFood <= 0)
+        {
+            Debug.Log("Game Complete");
+        }
     }
 }

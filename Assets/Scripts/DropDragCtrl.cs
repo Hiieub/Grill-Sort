@@ -77,14 +77,14 @@ public class DropDragCtrl : MonoBehaviour
                     }
                 }
             }
-            //else
-            //{
-            //    if(_cacheFood != null)
-            //    {
-            //        _cacheFood.OnHideFood();
-            //        _cacheFood = null;
-            //    }
-            //}
+            else
+            {
+                if (_cacheFood != null)
+                {
+                    _cacheFood.OnHideFood();
+                    _cacheFood = null;
+                }
+            }
         }
 
         if (Input.GetMouseButtonUp(0) && _hasDrag)
@@ -93,11 +93,11 @@ public class DropDragCtrl : MonoBehaviour
             {
                 _imgFoodDrag.transform.DOMove(_cacheFood.transform.position, 0.15f).OnComplete(() =>
                 {
-                    _currentFood?.OnCheckPrepareTray();
                     _imgFoodDrag.gameObject.SetActive(false);
                     _cacheFood.OnSetSlot(_currentFood.GetSpriteFood);
                     _cacheFood.OnActiveFood(true);
                     _cacheFood.OnCheckMerge();
+                    _currentFood?.OnCheckPrepareTray();
                     _cacheFood = null;
                     _currentFood = null;
                 });
