@@ -56,8 +56,9 @@ public class FoodSlot : MonoBehaviour
         _imgFood.transform.localScale = img.transform.localScale;
         _imgFood.transform.localEulerAngles = img.transform.localEulerAngles;
 
-        _imgFood.transform.DOLocalMove(Vector3.zero, 0.2f);
-        _imgFood.transform.DOScale(Vector3.one, 0.2f);
+        _imgFood.transform.DOLocalMove(Vector3.zero, 0.3f);
+        _imgFood.transform.DOScale(new Vector3(1.6f, 1.6f, 1f), 0.3f);
+        _imgFood.transform.DORotate(Vector3.zero, 0.2f);
     }
 
     public void OnCheckPrepareTray()
