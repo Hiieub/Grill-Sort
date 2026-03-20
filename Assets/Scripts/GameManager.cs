@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
+    [SerializeField] private int _allFood;
     [SerializeField] private int _totalFood; // tong so loai thuc an
     [SerializeField] private int _totalGrill; // tong so bep
     [SerializeField] private Transform _gridGrill;
@@ -34,10 +35,11 @@ public class GameManager : MonoBehaviour
         List<Sprite> takeFood = _totalSPriteFood.OrderBy(x => Random.value).Take(_totalFood).ToList();
         List<Sprite> useFood = new List<Sprite>();
 
-        for(int i = 0; i < takeFood.Count; i++)
+        for(int i = 0; i < _allFood; i++)
         {
+            int n = i % takeFood.Count;
             for(int j = 0; j < 3; j++)
-                useFood.Add(takeFood[i]);
+                useFood.Add(takeFood[n]);
         }
 
         // random vi tri cac item
@@ -96,10 +98,49 @@ public class GameManager : MonoBehaviour
 
     public void OnMinusFood()
     {
-        --_totalFood;
-        if(_totalFood <= 0)
+        --_allFood;
+        if(_allFood <= 0)
         {
             Debug.Log("Game Complete");
+        }
+    }
+
+    public void OnCheckAndShake()
+    {
+        Dictionary<string, List<FoodSlot>> groups = new Dictionary<string, List<FoodSlot>>();
+
+        foreach (var grill in _listGrills)
+        {
+            if (grill.gameObject.activeInHierarchy)
+            {
+                for(int i = 0; i < grill.TotalSlots.Count; i++)
+                {
+                    FoodSlot slot = grill.TotalSlots[i];
+                    if (slot.HasFood)
+                    {
+                        string name = slot.GetSpriteFood.name;
+                        if (!groups.ContainsKey(name))
+                        {
+                            groups.Add(name, new List<FoodSlot>());
+                        }
+
+                        groups[name].Add(slot);
+                    }
+                }
+            }
+        }
+        
+        foreach(var kvp in groups)
+        {
+            if(kvp.Value.Count >= 3)
+            {
+                for(int i = 0; i < 3; i++)
+                {
+                    kvp.Value[i].DoShake();
+                }
+
+                return;
+            }
         }
     }
 }

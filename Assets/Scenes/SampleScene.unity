@@ -20750,7 +20750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a93a81e976b964dae8797b8a579050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  _totalFood: 18
+  _allFood: 16
+  _totalFood: 15
   _totalGrill: 9
   _gridGrill: {fileID: 1295985009}
 --- !u!4 &1628070408
@@ -20781,6 +20782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropDragCtrl
   _imgFoodDrag: {fileID: 255141442}
+  _timeCheckSugget: 3
 --- !u!1 &1634984401
 GameObject:
   m_ObjectHideFlags: 0

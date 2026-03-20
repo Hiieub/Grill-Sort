@@ -66,6 +66,11 @@ public class FoodSlot : MonoBehaviour
         _grillCtrl?.OnCheckPrepareTray();
     }
 
+    public void DoShake()
+    {
+        _imgFood.transform.DOShakePosition(0.5f, 10f, 10, 180f);
+    }
+
     public FoodSlot GetSlotNull => _grillCtrl != null ? _grillCtrl.GetSlotNull() : null;
 
     public bool HasFood => _imgFood.gameObject.activeInHierarchy && _imgFood.color == _normalColor;

@@ -12,6 +12,8 @@ public class GrillStation : MonoBehaviour
 
     private Stack<TrayItem> _stackTrays = new Stack<TrayItem>();
 
+    public List<FoodSlot> TotalSlots => _totalSlot;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
