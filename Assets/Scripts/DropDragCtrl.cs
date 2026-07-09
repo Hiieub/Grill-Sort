@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class DropDragCtrl : MonoBehaviour
 {
@@ -8,17 +9,10 @@ public class DropDragCtrl : MonoBehaviour
     [SerializeField] private float _timeCheckSugget;
 
     private FoodSlot _currentFood, _cacheFood;
-    private bool _hasDrag;
+    private bool _isDragging;
     private Vector3 _offset;
     private float _countTime;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         _countTime += Time.deltaTime;
@@ -29,12 +23,12 @@ public class DropDragCtrl : MonoBehaviour
             GameManager.Instance?.OnCheckAndShake();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            _currentFood = Utils.GetRayCastUI<FoodSlot>(Input.mousePosition); // check o vi tri click chuot xem co UI gan class FoodSlot
+            _currentFood = Utils.GetRayCastUI<FoodSlot>(Mouse.current.position.value); // check o vi tri click chuot xem co UI gan class FoodSlot
             if(_currentFood != null && _currentFood.HasFood)
             {
-                _hasDrag = true;
+                _isDragging = true;
                 _cacheFood = _currentFood;
                 // gan sprite cho dummy image
                 _imgFoodDrag.gameObject.SetActive(true);
@@ -44,21 +38,21 @@ public class DropDragCtrl : MonoBehaviour
             
                 
                 // tinh offset
-                Vector3 mouseWordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 mouseWordPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
                 _offset = mouseWordPos - _currentFood.transform.position;
 
                 _currentFood.OnActiveFood(false);
             }
         }
 
-        if (_hasDrag)
+        if (_isDragging)
         {
-            Vector3 mouseWordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseWordPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
             Vector3 foodPos = mouseWordPos + _offset;
             foodPos.z = 0f;
             _imgFoodDrag.transform.position = foodPos;
 
-            FoodSlot slot = Utils.GetRayCastUI<FoodSlot>(Input.mousePosition);
+            FoodSlot slot = Utils.GetRayCastUI<FoodSlot>(Mouse.current.position.value);
             if(slot != null)
             {
                 if (!slot.HasFood) // vi tri item chua co food
@@ -97,7 +91,7 @@ public class DropDragCtrl : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0) && _hasDrag)
+        if (Mouse.current.leftButton.wasReleasedThisFrame && _isDragging)
         {
             if(_cacheFood != null) // xu ly fill item
             {
@@ -121,7 +115,7 @@ public class DropDragCtrl : MonoBehaviour
                 });
             }
 
-            _hasDrag = false;
+            _isDragging = false;
         }
     }
 

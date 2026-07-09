@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _totalGrill; // tong so bep
     [SerializeField] private Transform _gridGrill;
 
+    [SerializeField] private LevelLoader _levelLoader;
+    [SerializeField] private int _currentLevelIndex = 1;
+
     private List<GrillStation> _listGrills;
     private float _avgTray; // gia tri trung binh thuc an cho 1 dia
     private List<Sprite> _totalSPriteFood;
@@ -27,6 +30,15 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        LevelData data = _levelLoader.LoadLevel(_currentLevelIndex);
+
+        if (data != null)
+        {
+            _allFood = data.totalFood;
+            _totalFood = data.totalFoodType;
+            _totalGrill = data.totalGrill;
+        }
+
         OnInitLevel();
     }
 
