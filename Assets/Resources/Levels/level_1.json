@@ -1,5 +1,32 @@
 {
-    "totalFood": 8,
-    "totalFoodType": 2,
-    "totalGrill": 4
+  "difficult": 0,
+  "levelSeconds": 0,
+  "boardData": {
+    "id": "freeform_board",
+    "listTrayPos": [
+      { "x": -3.0, "y":  1.5 },
+      { "x":  0.0, "y":  1.5 },
+      { "x":  3.0, "y":  1.5 },
+      { "x": -3.0, "y": -1.5 },
+      { "x":  0.0, "y": -1.5 },
+      { "x":  3.0, "y": -1.5 }
+    ],
+    "listTrayData": [
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 }
+    ]
+  },
+  "spawnWareData": {
+    "totalWare": 12,
+    "totalWarePattern": 4,
+    "listWareSet": ["Items"],
+    "listLayerData": [
+      { "numberEmptySlot": 6, "match3Ratio": 100.0, "match2Ratio": 0.0, "match1Ratio": 0.0 },
+      { "numberEmptySlot": 4, "match3Ratio": 60.0,  "match2Ratio": 30.0, "match1Ratio": 10.0 }
+    ]
+  }
 }
