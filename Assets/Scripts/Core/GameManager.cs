@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private float remainingTime;
     private bool hasTimeLimit;
 
+    private List<GrillStation> allGrills = new List<GrillStation>();
     private List<GrillStation> activeGrills = new List<GrillStation>();
 
     // Cache sprite đã load
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         if (gridGrill != null)
-            activeGrills = Utils.GetListInChild<GrillStation>(gridGrill);
+            allGrills = Utils.GetListInChild<GrillStation>(gridGrill);
     }
 
     private void Start()
@@ -132,13 +133,19 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Bật/tắt bếp trước khi rải đồ ăn
-        int totalGrill = data.boardData.listTrayData?.Count ?? activeGrills.Count;
-        for (int i = 0; i < activeGrills.Count; i++)
-            activeGrills[i].gameObject.SetActive(i < totalGrill);
+        // Reset tất cả bếp trước khi init mới
+        foreach (var grill in allGrills)
+            grill.ResetGrill();
 
-        // Chỉ giữ lại các bếp đang active trong danh sách
-        activeGrills.RemoveAll(g => !g.gameObject.activeSelf);
+        // Bật/tắt bếp theo level data
+        int totalGrill = data.boardData.listTrayData?.Count ?? allGrills.Count;
+        activeGrills.Clear();
+        for (int i = 0; i < allGrills.Count; i++)
+        {
+            bool isActive = i < totalGrill;
+            allGrills[i].gameObject.SetActive(isActive);
+            if (isActive) activeGrills.Add(allGrills[i]);
+        }
 
         // Rải đồ ăn vào các bếp đang active
         SpawnFoodToGrills(data.spawnWareData);
@@ -156,19 +163,23 @@ public class GameManager : MonoBehaviour
             .Take(spawnData.totalWarePattern)
             .ToList();
 
-        // Tạo SETS - mỗi set = List 3 sprite cùng loại
-        List<List<Sprite>> allSets = new List<List<Sprite>>();
+        // Tạo flat list: mỗi ware = 3 items cùng loại, đảm bảo tổng chia hết cho 3
+        // Không dùng nested sets nữa → sẽ shuffle từng item riêng
+        List<Sprite> allItems = new List<Sprite>();
         for (int i = 0; i < spawnData.totalWare; i++)
         {
             Sprite t = pickedTypes[i % pickedTypes.Count];
-            allSets.Add(new List<Sprite> { t, t, t });
+            allItems.Add(t);
+            allItems.Add(t);
+            allItems.Add(t);
         }
 
-        // Shuffle SETS (không shuffle item bên trong set)
-        for (int i = allSets.Count - 1; i > 0; i--)
+        // Shuffle TỪNG ITEM — phá vỡ grouping "3 cùng loại nằm cạnh nhau"
+        // Kết quả: mỗi tray sẽ chứa mix các loại, player buộc phải sort
+        for (int i = allItems.Count - 1; i > 0; i--)
         {
             int j = UnityEngine.Random.Range(0, i + 1);
-            (allSets[i], allSets[j]) = (allSets[j], allSets[i]);
+            (allItems[i], allItems[j]) = (allItems[j], allItems[i]);
         }
 
         // Đọc config từ listLayerData để tính số slot để trống trên vỉ
@@ -183,16 +194,16 @@ public class GameManager : MonoBehaviour
         // số slot hiển thị đồ ăn trên vỉ khi bắt đầu
         int slotsToFill = Mathf.Clamp(3 - emptyPerGrill, 1, 3);
 
-        // Phân bổ sets đều vào các bếp
-        List<int> setsPerGrill = DistributeEvenly(numGrills, spawnData.totalWare);
+        // Phân bổ items (không phải sets) đều vào các bếp
+        List<int> itemsPerGrill = DistributeEvenly(numGrills, allItems.Count);
 
-        int setIdx = 0;
+        int idx = 0;
         for (int g = 0; g < numGrills; g++)
         {
-            int count = setsPerGrill[g];
-            List<List<Sprite>> grillSets = allSets.GetRange(setIdx, count);
-            setIdx += count;
-            activeGrills[g].OnInitGrillBySets(grillSets, slotsToFill);
+            int count = itemsPerGrill[g];
+            List<Sprite> grillItems = allItems.GetRange(idx, count);
+            idx += count;
+            activeGrills[g].OnInitGrillByItems(grillItems, slotsToFill);
         }
     }
 
@@ -289,6 +300,8 @@ public class GameManager : MonoBehaviour
 
     public void RegisterGrill(GrillStation grill)
     {
+        if (!allGrills.Contains(grill))
+            allGrills.Add(grill);
         if (!activeGrills.Contains(grill))
             activeGrills.Add(grill);
     }
@@ -312,9 +325,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        //Time.timeScale = 1f;
-
-        //LoadAndStartLevel(currentLevelIndex);
+        Time.timeScale = 1f;
+        LoadAndStartLevel(currentLevelIndex);
     }
 
 

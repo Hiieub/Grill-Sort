@@ -46,4 +46,13 @@ public class TrayItem : MonoBehaviour
 
         return emptySlots[Random.Range(0, emptySlots.Count)];
     }
+
+    public void ResetTray()
+    {
+        for (int i = 0; i < _foodList.Count; i++)
+        {
+            _foodList[i].sprite = null;
+            _foodList[i].gameObject.SetActive(false);
+        }
+    }
 }

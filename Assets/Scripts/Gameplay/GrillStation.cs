@@ -21,6 +21,20 @@ public class GrillStation : MonoBehaviour
         GameManager.Instance?.RegisterGrill(this);
     }
 
+    public void ResetGrill()
+    {
+        stackTrays.Clear();
+
+        foreach (var slot in totalSlot)
+            slot.ResetSlot();
+
+        foreach (var tray in totalTrays)
+        {
+            tray.ResetTray();
+            tray.gameObject.SetActive(false);
+        }
+    }
+
     public void OnInitGrill(int totalTray, List<Sprite> listFood)
     {
         int maxSlotFood = Mathf.Max(1, listFood.Count - totalTray); // giữ lại ít nhất 1 món/đĩa
@@ -123,6 +137,42 @@ public class GrillStation : MonoBehaviour
             stackTrays.Push(totalTrays[i]);
 
         for (int i = trayContents.Count; i < totalTrays.Count; i++)
+            totalTrays[i].gameObject.SetActive(false);
+    }
+
+    // Khởi tạo bếp bằng flat list items đã shuffle — mỗi tray sẽ chứa mix nhiều loại.
+    // GameManager truyền vào items đã shuffle toàn cục (không còn 3 cùng loại nằm liền nhau).
+    public void OnInitGrillByItems(List<Sprite> items, int slotsToFill)
+    {
+        stackTrays.Clear();
+        if (items == null || items.Count == 0) return;
+
+        // Đặt slotsToFill items đầu tiên lên vỉ nướng
+        int surfaceCount = Mathf.Min(slotsToFill, Mathf.Min(totalSlot.Count, items.Count));
+        for (int i = 0; i < surfaceCount; i++)
+            totalSlot[i].OnSetSlot(items[i]);
+
+        // Phần còn lại → nhét vào đĩa, mỗi đĩa chứa tối đa traySize items
+        const int traySize = 3;
+        int trayIdx = 0;
+
+        for (int i = surfaceCount; i < items.Count && trayIdx < totalTrays.Count; i += traySize)
+        {
+            int batchEnd = Mathf.Min(i + traySize, items.Count);
+            List<Sprite> trayItems = items.GetRange(i, batchEnd - i);
+
+            totalTrays[trayIdx].gameObject.SetActive(true);
+            totalTrays[trayIdx].OnSetFood(trayItems);
+            trayIdx++;
+        }
+
+        // Push vào stack: tray đầu (index 0) nằm đáy stack → pop ra cuối
+        // tray cuối (index trayIdx-1) nằm đỉnh stack → pop ra trước
+        for (int i = 0; i < trayIdx; i++)
+            stackTrays.Push(totalTrays[i]);
+
+        // Ẩn các tray không dùng
+        for (int i = trayIdx; i < totalTrays.Count; i++)
             totalTrays[i].gameObject.SetActive(false);
     }
 

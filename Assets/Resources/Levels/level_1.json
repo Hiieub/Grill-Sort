@@ -21,8 +21,8 @@
     ]
   },
   "spawnWareData": {
-    "totalWare": 12,
-    "totalWarePattern": 4,
+    "totalWare": 15,
+    "totalWarePattern": 5,
     "listWareSet": ["Items"],
     "listLayerData": [
       { "numberEmptySlot": 6, "match3Ratio": 100.0, "match2Ratio": 0.0, "match1Ratio": 0.0 },

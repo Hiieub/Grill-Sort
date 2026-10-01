@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class PanelHome : MonoBehaviour
 {
@@ -12,23 +13,19 @@ public class PanelHome : MonoBehaviour
     [SerializeField] private float duration = 0.6f;
 
     private Vector3 originalScale;
+    private UnityAction onSettingClick;
 
     private void Awake()
     {
         originalScale = btnPlay.transform.localScale;
 
-        if (btnSetting) btnSetting.onClick.AddListener(() =>
-        {
-            panelSetting.Open();
-        });
+        onSettingClick = () => panelSetting.Open();
+        if (btnSetting) btnSetting.onClick.AddListener(onSettingClick);
     }
 
     private void OnDestroy()
     {
-        if (btnSetting) btnSetting.onClick.RemoveListener(() =>
-        {
-            panelSetting.Open();
-        });
+        if (btnSetting) btnSetting.onClick.RemoveListener(onSettingClick);
     }
 
     private void OnEnable()

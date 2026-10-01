@@ -10,6 +10,7 @@ public class FoodSlot : MonoBehaviour
     private Color fadeColor = new Color(1f, 1f, 1f, 0.6f);
 
     private GrillStation grillCtrl;
+    private bool _isFaded;
 
     void Awake()
     {
@@ -29,12 +30,14 @@ public class FoodSlot : MonoBehaviour
     {
         imgFood.gameObject.SetActive(active);
         imgFood.color = normalColor;
+        _isFaded = false;
     }
 
     public void OnFadeFood()
     {
         this.OnActiveFood(true);
         imgFood.color = fadeColor;
+        _isFaded = true;
     }
 
     public void OnHideFood()
@@ -66,6 +69,14 @@ public class FoodSlot : MonoBehaviour
         grillCtrl?.OnCheckPrepareTray();
     }
 
+    public void ResetSlot()
+    {
+        imgFood.gameObject.SetActive(false);
+        imgFood.color = normalColor;
+        imgFood.sprite = null;
+        _isFaded = false;
+    }
+
     public void DoShake()
     {
         imgFood.transform.DOShakePosition(0.5f, 10f, 10, 180f);
@@ -73,6 +84,6 @@ public class FoodSlot : MonoBehaviour
 
     public FoodSlot GetSlotNull => grillCtrl != null ? grillCtrl.GetSlotNull() : null;
 
-    public bool HasFood => imgFood.gameObject.activeInHierarchy && imgFood.color == normalColor;
+    public bool HasFood => imgFood.gameObject.activeInHierarchy && !_isFaded;
     public Sprite GetSpriteFood => imgFood.sprite;
 }

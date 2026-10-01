@@ -42,19 +42,20 @@ public class DropDragCtrl : MonoBehaviour
 
     private void HandleDragInput()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Pointer.current != null && Pointer.current.press.wasPressedThisFrame)
             OnBeginDrag();
 
         if (isDragging)
             OnDragging();
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame && isDragging)
+        if (Pointer.current != null && Pointer.current.press.wasReleasedThisFrame && isDragging)
             OnEndDrag();
     }
 
     private void OnBeginDrag()
     {
-        FoodSlot hitSlot = Utils.GetRayCastUI<FoodSlot>(Mouse.current.position.value);
+        Vector2 pointerPos = Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
+        FoodSlot hitSlot = Utils.GetRayCastUI<FoodSlot>(pointerPos);
 
         if (hitSlot == null || !hitSlot.HasFood) return;
 
@@ -68,7 +69,7 @@ public class DropDragCtrl : MonoBehaviour
         imgFoodDrag.SetNativeSize();
         imgFoodDrag.transform.position = currentFood.transform.position;
 
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(pointerPos);
         offset = mouseWorldPos - currentFood.transform.position;
 
         currentFood.OnActiveFood(false);
@@ -78,14 +79,16 @@ public class DropDragCtrl : MonoBehaviour
     {
         if (imgFoodDrag == null || Camera.main == null) return;
 
+        Vector2 pointerPos = Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
+
         // Di chuyển dummy image theo chuột
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(pointerPos);
         Vector3 foodPos = mouseWorldPos + offset;
         foodPos.z = 0f;
         imgFoodDrag.transform.position = foodPos;
 
         // Raycast để tìm slot đang hover
-        FoodSlot hoveredSlot = Utils.GetRayCastUI<FoodSlot>(Mouse.current.position.value);
+        FoodSlot hoveredSlot = Utils.GetRayCastUI<FoodSlot>(pointerPos);
         UpdatePreviewSlot(hoveredSlot);
     }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class BottomBarController : MonoBehaviour
 {
@@ -24,11 +25,19 @@ public class BottomBarController : MonoBehaviour
     [SerializeField] private float iconMoveUpAmount = 55f;
     private float iconOriginalY;
 
+    private UnityAction onHomeClick;
+    private UnityAction onShopClick;
+    private UnityAction onLockClick;
+
     private void Awake()
     {
-        btnHome.onClick.AddListener(() => ShowTab(Tab.Home, btnHome.GetComponent<RectTransform>()));
-        btnShop.onClick.AddListener(() => ShowTab(Tab.Shop, btnShop.GetComponent<RectTransform>()));
-        btnLock.onClick.AddListener(() => ShowTab(Tab.Lock, btnLock.GetComponent<RectTransform>()));
+        onHomeClick = () => ShowTab(Tab.Home, btnHome.GetComponent<RectTransform>());
+        onShopClick = () => ShowTab(Tab.Shop, btnShop.GetComponent<RectTransform>());
+        onLockClick = () => ShowTab(Tab.Lock, btnLock.GetComponent<RectTransform>());
+
+        if (btnHome) btnHome.onClick.AddListener(onHomeClick);
+        if (btnShop) btnShop.onClick.AddListener(onShopClick);
+        if (btnLock) btnLock.onClick.AddListener(onLockClick);
 
         if (iconShop != null) iconOriginalY = iconShop.anchoredPosition.y;
     }
@@ -38,6 +47,13 @@ public class BottomBarController : MonoBehaviour
         Canvas.ForceUpdateCanvases();
 
         ShowTab(Tab.Home, btnHome.GetComponent<RectTransform>(), true);
+    }
+
+    private void OnDestroy()
+    {
+        if (btnHome) btnHome.onClick.RemoveListener(onHomeClick);
+        if (btnShop) btnShop.onClick.RemoveListener(onShopClick);
+        if (btnLock) btnLock.onClick.RemoveListener(onLockClick);
     }
 
     private enum Tab { Home, Shop, Lock }
