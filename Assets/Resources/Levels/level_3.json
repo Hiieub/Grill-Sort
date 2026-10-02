@@ -1,0 +1,46 @@
+{
+  "difficult": 1,
+  "levelSeconds": 0,
+  "boardData": {
+    "id": "grid_board",
+    "width": 3,
+    "height": 4,
+    "listTrayPos": [
+      { "x": -3.0, "y":  4.5 },
+      { "x":  0.0, "y":  4.5 },
+      { "x":  3.0, "y":  4.5 },
+      { "x": -3.0, "y":  1.5 },
+      { "x":  0.0, "y":  1.5 },
+      { "x":  3.0, "y":  1.5 },
+      { "x": -3.0, "y": -1.5 },
+      { "x":  0.0, "y": -1.5 },
+      { "x":  3.0, "y": -1.5 },
+      { "x": -3.0, "y": -4.5 },
+      { "x":  0.0, "y": -4.5 },
+      { "x":  3.0, "y": -4.5 }
+    ],
+    "listTrayData": [
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 },
+      { "id": "normal_tray", "size": 3 }
+    ]
+  },
+  "spawnWareData": {
+    "totalWare": 24,
+    "totalWarePattern": 8,
+    "listWareSet": ["Items"],
+    "listLayerData": [
+      { "numberEmptySlot": 12, "match3Ratio": 70.0, "match2Ratio": 20.0, "match1Ratio": 10.0 },
+      { "numberEmptySlot": 8,  "match3Ratio": 40.0, "match2Ratio": 40.0, "match1Ratio": 20.0 }
+    ]
+  }
+}

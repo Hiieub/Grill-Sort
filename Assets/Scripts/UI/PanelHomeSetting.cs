@@ -16,10 +16,10 @@ public class PanelHomeSetting : MonoBehaviour
         if (btnClose) btnClose.onClick.RemoveListener(HidePanel);
     }
 
-    private void Start()
-    {
-        HidePanel();
-    }
+    //private void Start()
+    //{
+    //    HidePanel();
+    //}
 
     public void Open()
     {

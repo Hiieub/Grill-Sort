@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: d96c53ff32889d846bb970f3f2cf10d1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6118698971348300767
+    second: bosok_0
+  - first:
+      213: -6244471955573659409
+    second: bosok_1
+  - first:
+      213: 1329884171138048974
+    second: bosok_2
+  - first:
+      213: 2980403773995023208
+    second: bosok_3
+  - first:
+      213: 3701136819187469464
+    second: bosok_4
+  - first:
+      213: -7191443846557568649
+    second: bosok_5
+  - first:
+      213: 7669613500390160562
+    second: bosok_6
+  - first:
+      213: -8322994200238661858
+    second: bosok_7
+  - first:
+      213: 3650276237177469843
+    second: bosok_8
+  - first:
+      213: -6220484583923793080
+    second: bosok_9
+  - first:
+      213: 7386622147763139958
+    second: bosok_10
+  - first:
+      213: -1026123994061651672
+    second: bosok_11
+  - first:
+      213: -1620330671248151762
+    second: bosok_12
+  - first:
+      213: -6157194836151059795
+    second: bosok_13
+  - first:
+      213: -2023232432461024092
+    second: bosok_14
+  - first:
+      213: -816895734121557917
+    second: bosok_15
+  - first:
+      213: -7422157548096457369
+    second: bosok_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bosok_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 496
+        width: 317
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd373c2db4cf9e450800000000000000
+      internalID: 6118698971348300767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_1
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 693
+        width: 482
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe8a42e47dd2759a0800000000000000
+      internalID: -6244471955573659409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_2
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 562
+        width: 150
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec3291d8b92b47210800000000000000
+      internalID: 1329884171138048974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_3
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 402
+        width: 50
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86bf43c01758c5920800000000000000
+      internalID: 2980403773995023208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_4
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 496
+        width: 259
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89cc9ccd3541d5330800000000000000
+      internalID: 3701136819187469464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_5
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 527
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77174c76cebd23c90800000000000000
+      internalID: -7191443846557568649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_6
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 497
+        width: 21
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b8bb4fd7d0ff6a60800000000000000
+      internalID: 7669613500390160562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_7
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 335
+        width: 187
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1f532b3fd8ce7c80800000000000000
+      internalID: -8322994200238661858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_8
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 335
+        width: 175
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39b3301d5e268a230800000000000000
+      internalID: 3650276237177469843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_9
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 254
+        width: 321
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 843cd6c7a366ca9a0800000000000000
+      internalID: -6220484583923793080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_10
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 413
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 675747715bd828660800000000000000
+      internalID: 7386622147763139958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_11
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 203
+        width: 104
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 821437ef9a972c1f0800000000000000
+      internalID: -1026123994061651672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_12
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 414
+        width: 19
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2b6591e6dd6389e0800000000000000
+      internalID: -1620330671248151762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 369
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daab8523bef3d8aa0800000000000000
+      internalID: -6157194836151059795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_14
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 1
+        width: 335
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a47c1d72d80ce3e0800000000000000
+      internalID: -2023232432461024092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_15
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 0
+        width: 97
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 360172d68adc9a4f0800000000000000
+      internalID: -816895734121557917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosok_16
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 203
+        width: 40
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 765f9b6c8033ff890800000000000000
+      internalID: -7422157548096457369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bosok_0: 6118698971348300767
+      bosok_1: -6244471955573659409
+      bosok_10: 7386622147763139958
+      bosok_11: -1026123994061651672
+      bosok_12: -1620330671248151762
+      bosok_13: -6157194836151059795
+      bosok_14: -2023232432461024092
+      bosok_15: -816895734121557917
+      bosok_16: -7422157548096457369
+      bosok_2: 1329884171138048974
+      bosok_3: 2980403773995023208
+      bosok_4: 3701136819187469464
+      bosok_5: -7191443846557568649
+      bosok_6: 7669613500390160562
+      bosok_7: -8322994200238661858
+      bosok_8: 3650276237177469843
+      bosok_9: -6220484583923793080
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

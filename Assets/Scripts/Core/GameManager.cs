@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // Ưu tiên đọc level từ PlayerProgress (lưu qua scene)
+        if (PlayerProgress.Instance != null)
+            currentLevelIndex = PlayerProgress.Instance.CurrentLevel;
+
         LoadAndStartLevel(currentLevelIndex);
     }
 
@@ -85,12 +89,10 @@ public class GameManager : MonoBehaviour
 
             case GameState.Victory:
                 Debug.Log("[GameManager] VICTORY!");
-                // TODO: Gọi UIManager.Instance.ShowVictoryPanel()
                 break;
 
             case GameState.GameOver:
                 Debug.Log("[GameManager] GAME OVER");
-                // TODO: Gọi UIManager.Instance.ShowGameOverPanel()
                 break;
         }
     }
@@ -164,7 +166,6 @@ public class GameManager : MonoBehaviour
             .ToList();
 
         // Tạo flat list: mỗi ware = 3 items cùng loại, đảm bảo tổng chia hết cho 3
-        // Không dùng nested sets nữa → sẽ shuffle từng item riêng
         List<Sprite> allItems = new List<Sprite>();
         for (int i = 0; i < spawnData.totalWare; i++)
         {
@@ -175,7 +176,6 @@ public class GameManager : MonoBehaviour
         }
 
         // Shuffle TỪNG ITEM — phá vỡ grouping "3 cùng loại nằm cạnh nhau"
-        // Kết quả: mỗi tray sẽ chứa mix các loại, player buộc phải sort
         for (int i = allItems.Count - 1; i > 0; i--)
         {
             int j = UnityEngine.Random.Range(0, i + 1);

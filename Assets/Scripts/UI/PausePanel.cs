@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
@@ -156,7 +156,9 @@ public class PausePanel : MonoBehaviour
     {
         Debug.Log("[PausePanel] Home clicked");
 
-        // TODO:
-        // Gọi LevelLoader để về Home Scene.
+        if (SceneLoader.Instance != null)
+            SceneLoader.Instance.GoToHome();
+        else
+            UnityEngine.SceneManagement.SceneManager.LoadScene("HomeScene");
     }
 }
