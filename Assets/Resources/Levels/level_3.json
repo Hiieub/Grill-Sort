@@ -1,6 +1,6 @@
 {
   "difficult": 1,
-  "levelSeconds": 0,
+  "levelSeconds": 100,
   "boardData": {
     "id": "grid_board",
     "width": 3,

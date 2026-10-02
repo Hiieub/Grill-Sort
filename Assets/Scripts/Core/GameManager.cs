@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public static event Action<int> OnMergeSuccess; // Tham số: còn bao nhiêu bộ nữa
+    public static event Action<int, int> OnMergeSuccess; // Tham số: còn bao nhiêu bộ nữa + số star
     public static event Action<GameState> OnStateChanged; // Tham số: State mới
 
     [Header("References")]
@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     private float remainingTime;
     private bool hasTimeLimit;
 
+    private int starCount; // xu nhận được (hình dạng ngôi sao)
+    private int currentStar = 0; // reset mỗi level
+
     private List<GrillStation> allGrills = new List<GrillStation>();
     private List<GrillStation> activeGrills = new List<GrillStation>();
 
@@ -41,6 +44,8 @@ public class GameManager : MonoBehaviour
 
         if (gridGrill != null)
             allGrills = Utils.GetListInChild<GrillStation>(gridGrill);
+
+        starCount = PlayerPrefs.GetInt("TotalStar", 0);
     }
 
     private void Start()
@@ -89,6 +94,11 @@ public class GameManager : MonoBehaviour
 
             case GameState.Victory:
                 Debug.Log("[GameManager] VICTORY!");
+                HealthManager.Instance.RefundHealth();
+
+                starCount += currentStar;
+                PlayerPrefs.SetInt("TotalStar", starCount);
+                PlayerPrefs.Save();
                 break;
 
             case GameState.GameOver:
@@ -249,10 +259,13 @@ public class GameManager : MonoBehaviour
         if (currentState != GameState.Playing) return;
 
         remainingWare--;
-        Debug.Log($"[GameManager] Merge thành công! Còn lại: {remainingWare} bộ");
+        currentStar++;
+        //starCount += currentStar;
+        //PlayerPrefs.SetInt("TotalStar", starCount);
+        //PlayerPrefs.Save();
+        Debug.Log($"[GameManager] Merge thành công! Còn lại: {remainingWare} bộ và có {currentStar} star");
 
-
-        OnMergeSuccess?.Invoke(remainingWare);
+        OnMergeSuccess?.Invoke(remainingWare, currentStar);
 
         if (remainingWare <= 0)
         {
@@ -325,6 +338,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        currentStar = 0;
+
         Time.timeScale = 1f;
         LoadAndStartLevel(currentLevelIndex);
     }
@@ -332,6 +347,7 @@ public class GameManager : MonoBehaviour
 
     public float RemainingTime => remainingTime;
     public int RemainingWare => remainingWare;
+    public int CurrentStar => currentStar;
     public GameState CurrentState => currentState;
     public int CurrentLevelIndex => currentLevelIndex;
     public float MaxTime => currentLevelData != null ? currentLevelData.levelSeconds : 0f;

@@ -12,6 +12,7 @@ public class TopHUD : MonoBehaviour
 
     private float maxTime;
     private int maxWare;
+    private int starScore;
 
     private void OnEnable()
     {
@@ -37,17 +38,18 @@ public class TopHUD : MonoBehaviour
     {
         maxTime = GameManager.Instance.MaxTime;
         maxWare = GameManager.Instance.RemainingWare;
+        starScore = GameManager.Instance.CurrentStar;
 
         txtLevel.text = "Level " + GameManager.Instance.CurrentLevelIndex;
-        txtStarCount.text = maxWare.ToString();
+        txtStarCount.text = starScore.ToString();
 
         timeProgressFill.fillAmount = 1f;
         levelProgressFill.fillAmount = 0f;
     }
 
-    private void HandleMergeSuccess(int remainingWare)
+    private void HandleMergeSuccess(int remainingWare, int starCount)
     {
-        txtStarCount.text = remainingWare.ToString();
+        txtStarCount.text = starCount.ToString();
 
         if (maxWare > 0)
         {

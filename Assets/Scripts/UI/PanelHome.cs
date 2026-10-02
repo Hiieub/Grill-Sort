@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
@@ -11,6 +11,7 @@ public class PanelHome : MonoBehaviour
     [SerializeField] private Button btnPlay;
 
     [SerializeField] private TextMeshProUGUI txtPlayLevel;
+    [SerializeField] private TextMeshProUGUI txtTotalStar;
 
     [SerializeField] private float scaleMultiplier = 1.05f;
     [SerializeField] private float duration = 0.6f;
@@ -36,14 +37,30 @@ public class PanelHome : MonoBehaviour
         if (btnPlay) btnPlay.onClick.RemoveListener(onPlayClick);
     }
 
+    private void Start()
+    {
+        int totalStar = PlayerPrefs.GetInt("TotalStar", 0);
+        txtTotalStar.text = totalStar.ToString();
+    }
+
     private void OnBtnPlayClicked()
     {
         Debug.Log("[PanelHome] Play clicked");
 
-        if (SceneLoader.Instance != null)
-            SceneLoader.Instance.GoToMain();
+        if (HealthManager.Instance.CanPlay())
+        {
+            HealthManager.Instance.DeductHealth();
+
+            if (SceneLoader.Instance != null)
+                SceneLoader.Instance.GoToMain();
+            else
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
+        }
         else
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
+        {
+            Debug.Log("Hết Tym");
+            HealthManager.Instance.ShowOutOfHealthPopup();
+        }
     }
 
     private void OnEnable()
